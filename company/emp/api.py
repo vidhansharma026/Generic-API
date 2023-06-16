@@ -1,6 +1,9 @@
 from rest_framework import generics
+from rest_framework.response import Response
 from . models import *
 from . serializers import *
+# from django.contrib.auth.hashers import make_password
+# from rest_framework_simplejwt.tokens import RefreshToken
 
 # class for employee api
 
@@ -28,29 +31,23 @@ class EmployeeDeleteAPI(generics.DestroyAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
 
-# class for employee api
+# class RegistrationAPIView(generics.CreateAPIView):
+#     queryset = Employee.objects.all()
+#     serializer_class = EmployeeSerializer
 
-class StaffCreateAPI(generics.CreateAPIView):
-    queryset = Staff.objects.all()
-    serializer_class = StaffSerializer
+#     def post(self,request):
+#         data = request.POST.copy()
+#         password = data.get('password')
+#         data['password'] = make_password(password)
+#         serializer = self.get_serializer(data = data)
+#         serializer.is_valid(raise_exception = True)
+#         emp = serializer.save()
+#         refresh = RefreshToken.for_user(emp)
+#         token = {
+#             'refresh' : str(refresh),
+#             'access' : str(refresh.access_token),
+#         }
+#         return Response(token)
 
-class StaffAllDataAPI(generics.ListAPIView):
-    queryset = Staff.objects.all()
-    serializer_class = StaffSerializer
 
-class StaffOneDataAPI(generics.RetrieveAPIView):
-    queryset = Staff.objects.all()
-    serializer_class = StaffSerializer
-
-class StaffUpdateAPI(generics.UpdateAPIView):
-    queryset = Staff.objects.all()
-    serializer_class = StaffSerializer
-
-class StaffUpdatePartialAPI(generics.RetrieveUpdateAPIView):
-    queryset = Staff.objects.all()
-    serializer_class = StaffSerializer
-
-class StaffDeleteAPI(generics.DestroyAPIView):
-    queryset = Staff.objects.all()
-    serializer_class = StaffSerializer
 
